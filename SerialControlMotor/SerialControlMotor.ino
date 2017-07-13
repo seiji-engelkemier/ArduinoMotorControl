@@ -1,4 +1,4 @@
-int delayms=50;
+int delayms=100;
 
 // 6 pin numbers for each motor
 int p_clkp[]={22,32,42};
@@ -63,7 +63,7 @@ void setup()
   }
 
   
-//  Serial.println("Enter a to rotate motor CW, press z for CCW, q to stop");
+  Serial.println("Press and hold - green for CCW, red for CW.");
   
 }
 
@@ -72,33 +72,37 @@ void loop()
 {
   if (digitalRead(greenBut) == LOW)
   {
-    Serial.println("green Button pressed");
-    // Run all motors CCW
+    // Set all motors to CCW
     for (int i=0;i<3;i++)
     {
       cwp[i]=HIGH;
       cwm[i]=LOW;
-      clkp[i]=HIGH;
-      clkm[i]=LOW;
+      WriteSignal();
     }
-    WriteSignal();
-    delayMicroseconds(delayms);
-    MotorOffSignal(); // Includes ending delay timing
+    
+    // The while loop allows the motor to spin normally by 
+    // preventing the pause caused by the Arduino program looping
+    while (digitalRead(greenBut) == LOW)
+    {
+      MotorOnSignal();
+      MotorOffSignal();
+    }
   }
+
   if (digitalRead(redBut) == LOW)
   {
-    Serial.println("red Button pressed");
-    // Run all motors CW
+    // Set all motors to CW
     for (int i=0;i<3;i++)
     {
       cwp[i]=LOW;
       cwm[i]=HIGH;
-      clkp[i]=HIGH;
-      clkm[i]=LOW;
+      WriteSignal();
     }
-    WriteSignal();
-    delayMicroseconds(delayms);
-    MotorOffSignal(); // Includes ending delay timing
+    while (digitalRead(redBut) == LOW)
+    {
+      MotorOnSignal();
+      MotorOffSignal();
+    }
   }
   
   
@@ -119,17 +123,27 @@ void WriteSignal()
   }
 }
 
+void MotorOnSignal()
+{
+  for (int i=0;i<3;i++)
+  {
+    clkp[i]=HIGH;
+    clkm[i]=LOW;
+    digitalWrite(p_clkp[i],clkp[i]);
+    digitalWrite(p_clkm[i],clkm[i]); 
+  }      
+  delayMicroseconds(delayms);
+}
+
 void MotorOffSignal()
 {
   for (int i=0;i<3;i++)
   {
     clkp[i]=LOW;
     clkm[i]=LOW;
-
     digitalWrite(p_clkp[i],clkp[i]);
     digitalWrite(p_clkm[i],clkm[i]); 
   }      
-    
   delayMicroseconds(delayms);
 }
 
