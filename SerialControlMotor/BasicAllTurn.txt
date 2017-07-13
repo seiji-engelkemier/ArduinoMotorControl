@@ -1,0 +1,76 @@
+/*
+  
+  for (int i=0;i<3;i++)
+//  {
+//    if (s_en[i]==1)
+//    {
+//      if (s_dir[i]==1)
+//      {
+//        // Spin CW
+//        cwp[i]=LOW;
+//        cwm[i]=HIGH;
+//        clkp[i]=HIGH;
+//        clkm[i]=LOW;
+//
+//        if (i == 2) 
+//        {
+//          // Spin CCW
+//          cwp[i]=HIGH;
+//          cwm[i]=LOW;
+//          clkp[i]=HIGH;
+//          clkm[i]=LOW;
+//        }
+//      }
+//      if (s_dir[i]==0)
+//      {
+//        cwp[i]=LOW;
+//        cwm[i]=HIGH;
+//        clkp[i]=LOW;
+//        clkm[i]=HIGH;
+//      }  
+//    
+//    digitalWrite(p_clkp[i],clkp[i]);
+//    digitalWrite(p_clkm[i],clkm[i]); 
+//    digitalWrite(p_cwp[i],cwp[i]);
+//    digitalWrite(p_cwm[i],cwm[i]);
+//    
+//    } 
+//    
+//  }
+//  
+//  
+//  delayMicroseconds(delayms);
+
+  // Need this portion to turn clock signal off or else motor doesn't spin.
+  for (int i=0;i<3;i++)
+  {
+    if (s_en[i]==1)
+    {
+      if (s_dir[i]==1)
+      {
+        cwp[i]=HIGH;
+        cwm[i]=LOW;
+        clkp[i]=LOW;
+        clkm[i]=LOW;
+      }
+      if (s_dir[i]==0)
+      {
+        cwp[i]=LOW;
+        cwm[i]=HIGH;
+        clkp[i]=LOW;
+        clkm[i]=LOW;
+      }  
+    
+    digitalWrite(p_clkp[i],clkp[i]);
+    digitalWrite(p_clkm[i],clkm[i]); 
+    digitalWrite(p_cwp[i],cwp[i]);
+    digitalWrite(p_cwm[i],cwm[i]);
+  
+    
+    }
+  
+    
+  }
+  
+  delayMicroseconds(delayms);
+  */
