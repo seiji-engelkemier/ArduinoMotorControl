@@ -22,7 +22,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  ++count;
+
   
    // Using pushbutton as momentary switch
   while (digitalRead(buttonA)==HIGH)
