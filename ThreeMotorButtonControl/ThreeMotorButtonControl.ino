@@ -19,8 +19,8 @@ bool s_en[3];
 bool s_dir[3];
 
 // Button control 
-const int greenBut=9;
-const int redBut=8;
+const int greenBut=48;
+const int redBut=49;
 
 
 
@@ -70,7 +70,7 @@ void setup()
 
 void loop() 
 {
-  if (digitalRead(greenBut) == LOW)
+  if (digitalRead(greenBut) == HIGH) // temp change condition from LOW to HIGH
   {
     // Set all motors to CCW
     for (int i=0;i<3;i++)
@@ -82,14 +82,14 @@ void loop()
     
     // The while loop allows the motor to spin normally by 
     // preventing the pause caused by the Arduino program looping
-    while (digitalRead(greenBut) == LOW)
+    while (digitalRead(greenBut) == HIGH)
     {
       MotorOnSignal();
       MotorOffSignal();
     }
   }
 
-  if (digitalRead(redBut) == LOW)
+  if (digitalRead(redBut) == HIGH) // temp change condition from LOW to HIGH
   {
     // Set all motors to CW
     for (int i=0;i<3;i++)
@@ -98,7 +98,7 @@ void loop()
       cwm[i]=HIGH;
       WriteSignal();
     }
-    while (digitalRead(redBut) == LOW)
+    while (digitalRead(redBut) == HIGH)
     {
       MotorOnSignal();
       MotorOffSignal();

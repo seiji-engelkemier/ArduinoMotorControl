@@ -9,12 +9,12 @@ class Motor
   int ENM_pin;
   int CW_buttonpin;
   int CCW_buttonpin;
-  int MotorInterval = 100; // microseconds between HIGH/LOW CLK signal for motor
+  int MotorInterval = 100; // milliseconds between HIGH/LOW CLK signal for motor
   int motor_pins[6];
   int button_pins[2];
 
   // These maintain the current state
-  unsigned long previousMicros;   // will store motor cycling
+  unsigned long previousMillis;   // will store motor cycling
   bool buttonState;               // stores whether button is pressed
   bool cwp;                       // keeps track of DIR signal
   bool cwm;
@@ -70,32 +70,39 @@ class Motor
        */
       if ((digitalRead(CCW_buttonpin) == HIGH) && (digitalRead(CW_buttonpin) == HIGH))
       {
-        // if both CW and CCW buttons are pressed, have motor do nothing
-        // this condition may be redundant. Being explicit for first run throughs.
-        MotorOff();
-      }      
+//        // if both CW and CCW buttons are pressed, have motor do nothing
+//        // this condition may be redundant. Being explicit for first run throughs.
+//        MotorOff();
+        digitalWrite(6, LOW);
+        digitalWrite(7, LOW);
+      }
       else if (digitalRead(CW_buttonpin) == HIGH)
       {
-        // run motor CW
-        cwp = LOW;
-        cwm = HIGH;
-        digitalWrite(motor_pins[2],cwp);
-        digitalWrite(motor_pins[3],cwm);
-        MotorRun();
+//        // run motor CW
+//        cwp = LOW;
+//        cwm = HIGH;
+//        digitalWrite(motor_pins[2],cwp);
+//        digitalWrite(motor_pins[3],cwm);
+//        MotorRun();
+          digitalWrite(6,HIGH);
       }
       else if (digitalRead(CCW_buttonpin) == HIGH)
       {
-        // run motor CCW
-        cwp = HIGH;
-        cwm = LOW;
-        digitalWrite(motor_pins[2],cwp);
-        digitalWrite(motor_pins[3],cwm);
-        MotorRun();
+//        // run motor CCW
+//        cwp = HIGH;
+//        cwm = LOW;
+//        digitalWrite(motor_pins[2],cwp);
+//        digitalWrite(motor_pins[3],cwm);
+//        MotorRun();
+          digitalWrite(7,HIGH);
       }
+
       else
       {
         // neither button is pressed
-        MotorOff();
+//        MotorOff();
+        digitalWrite(6, LOW);
+        digitalWrite(7, LOW);
       }
     }
 
@@ -103,17 +110,17 @@ class Motor
     void MotorRun()
     {
       // check to see if it's time to change signal of motor
-      unsigned long currentMicros = micros();
+      unsigned long currentMillis = millis();
 
-      if((clkp == HIGH) && (currentMicros - previousMicros >= MotorInterval))
+      if((clkp == HIGH) && (currentMillis - previousMillis >= MotorInterval))
       {
-        previousMicros = currentMicros;
+        previousMillis = currentMillis;
         clkp = LOW;
         digitalWrite(motor_pins[0],clkp);
       }
-      if((clkp == LOW) && (currentMicros - previousMicros >= MotorInterval))
+      if((clkp == LOW) && (currentMillis - previousMillis >= MotorInterval))
       {
-        previousMicros = currentMicros;
+        previousMillis = currentMillis;
         clkp = HIGH;
         digitalWrite(motor_pins[0],clkp);
       }
@@ -145,10 +152,10 @@ int b_cw[]={28,38,48};
 int b_ccw[]={29,39,49};
 */
 
-// Motor(clkp_pin,clkm_pin,cwp_pin,cwm_pin,enp_pin,enm_pin,CWbutton,CCWbutton) //
-Motor motor1(22, 23, 24, 25, 26, 27, 28, 29);
-Motor motor2(32, 33, 34, 35, 36, 37, 38, 39);
-Motor motor3(42, 43, 44, 45, 46, 47, 48, 49);
+/* Motor(clkp_pin,clkm_pin,cwp_pin,cwm_pin,enp_pin,enm_pin,CWbutton,CCWbutton) */
+Motor motor1(6, 2, 6, 7, 52, 53, 22, 23);
+//Motor motor2(32, 33, 34, 35, 36, 37, 38, 39);
+//Motor motor3(42, 43, 44, 45, 46, 47, 48, 49);
 
 void setup()
 {
@@ -158,7 +165,7 @@ void setup()
 void loop()
 {
   motor1.Update();
-  motor2.Update();
-  motor3.Update();
+//  motor2.Update();
+//  motor3.Update();
 }
 
