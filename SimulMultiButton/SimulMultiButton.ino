@@ -149,16 +149,32 @@ int b_ccw[]={29,39,49};
 Motor motor1(22, 23, 24, 25, 26, 27, 28, 29);
 Motor motor2(32, 33, 34, 35, 36, 37, 38, 39);
 Motor motor3(42, 43, 44, 45, 46, 47, 48, 49);
+int button4cw = 52;
+int button4ccw = 53;
 
 void setup()
 {
-  
+  pinMode(button4cw, INPUT);
+  pinMode(button4ccw, INPUT);
 }
 
 void loop()
 {
-  motor1.Update();
-  motor2.Update();
-  motor3.Update();
+  if (digitalRead(button4cw) == HIGH)
+  {
+    // run motor 1,2,3 CW
+  }
+  else if (digitalRead(button4ccw) == HIGH)
+  {
+    // run motor 1,2,3 CCW
+  }
+  else
+  {
+    // run motors as usual
+    motor1.Update();
+    motor2.Update();
+    motor3.Update();
+  }
+
 }
 
