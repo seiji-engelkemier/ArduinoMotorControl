@@ -64,7 +64,7 @@ void loop() {
   Serial.print("left 3: "); Serial.print(digitalRead(pin5));
   Serial.print(" | right 3: "); Serial.println(digitalRead(pin6));
 
-  Serial.print("dig-read: ");Serial.println(digitalRead(3));
+//  Serial.print("dig-read: ");Serial.println(digitalRead(28));
 //  digitalWrite(13,HIGH);
 //  delay(250);
 //  digitalWrite(13,LOW);
