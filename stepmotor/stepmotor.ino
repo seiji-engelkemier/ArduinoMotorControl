@@ -4,10 +4,10 @@
  *  
  */
 // defines pins numbers
-const int stepPin = 3; 
-const int dirPin = 4; 
+const int stepPin = 2; 
+const int dirPin = 3; 
 const int greenBut = 5;
-const int redBut=6;
+const int redBut=4;
 int pauseDur = 10000;
 float wirelength=0;
 int numStep=0;

@@ -9,7 +9,7 @@ class Motor
   int ENM_pin;
   int CW_buttonpin;
   int CCW_buttonpin;
-  int MotorInterval = 100; // microseconds between HIGH/LOW CLK signal for motor
+  int MotorInterval = 500; // microseconds between HIGH/LOW CLK signal for motor
   int motor_pins[6];
   int button_pins[2];
 
