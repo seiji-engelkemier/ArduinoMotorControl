@@ -1,0 +1,1 @@
+For some reason, changing from one kind of push buttons to tactile switches causes issues for controlling the Nema23 motor using stepmotor.ino sketch. Writing this Arduino sketch to convert from running motor based on delay() function to a state machine. This sketch does not work as is right now.
